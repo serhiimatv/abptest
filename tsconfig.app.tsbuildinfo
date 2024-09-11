@@ -1,0 +1,1 @@
+{"root":["./src/main.tsx","./src/vite-env.d.ts","./src/components/errorboundary.tsx","./src/components/header.tsx","./src/hooks/usevariablesquery.ts","./src/models/variablesresponse.ts","./src/models/vinresponse.ts","./src/pages/definitevariable.tsx","./src/pages/variables.tsx","./src/pages/vindecoder.tsx","./src/router/index.ts","./src/utility/index.ts"],"version":"5.6.2"}
