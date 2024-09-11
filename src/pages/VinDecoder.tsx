@@ -1,14 +1,16 @@
 import { FC, SyntheticEvent, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   checkCacheLength,
   fetchVin,
   filteredData,
+  getHistory,
   validateProhibitedSymbols,
   validateSize,
 } from "../utility";
 
 const VinDecoder: FC = () => {
+  const queryClient = useQueryClient();
   const [value, setValue] = useState("");
   const [validationError, setValidationError] = useState({
     minSize: false,
@@ -67,7 +69,7 @@ const VinDecoder: FC = () => {
       </section>
       <section className="cache-results">
         <h2>Request history</h2>
-        {cache.map((value, idx) => (
+        {getHistory(queryClient, cache).map((value, idx) => (
           <button key={value + idx} onClick={() => setValue(value)}>
             {value}
           </button>

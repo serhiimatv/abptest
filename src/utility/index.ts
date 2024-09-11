@@ -1,3 +1,4 @@
+import { QueryClient } from "@tanstack/react-query";
 import { VinResponse } from "../models/vinResponse";
 
 export const stripHtmlTags = (str: string): string => {
@@ -64,4 +65,18 @@ export const checkCacheLength = (array: string[], string: string) => {
   }
 
   return arrayClone;
+};
+
+export const getHistory = (client: QueryClient, cache: string[]): string[] => {
+  const queries = client
+    .getQueryCache()
+    .findAll({ queryKey: ["userVariable"] });
+
+  const keys = queries.map((query) => {
+    if (cache.includes(query.queryKey[1] as string)) {
+      return query.queryKey[1];
+    }
+  }) as string[];
+
+  return keys.filter((key) => key);
 };
