@@ -7,7 +7,7 @@ interface IProps {
   setValue: Dispatch<React.SetStateAction<string>>;
   setValidationError: Dispatch<
     React.SetStateAction<{
-      minSize: boolean;
+      maxSize: boolean;
       prohibitedSymbols: boolean;
     }>
   >;
@@ -24,7 +24,7 @@ const DecryptedCodes: FC<IProps> = ({ setValue, setValidationError }) => {
         <button
           key={value + idx}
           onClick={() => {
-            setValidationError({ minSize: false, prohibitedSymbols: false });
+            setValidationError({ maxSize: false, prohibitedSymbols: false });
             setValue(value);
           }}
         >

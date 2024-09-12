@@ -12,7 +12,7 @@ import DecryptedCodes from "../components/DecryptedCodes";
 const Home: FC = () => {
   const [value, setValue] = useState("");
   const [validationError, setValidationError] = useState({
-    minSize: false,
+    maxSize: false,
     prohibitedSymbols: false,
   });
 
@@ -24,13 +24,13 @@ const Home: FC = () => {
     e.preventDefault();
 
     const validationErrorState = {
-      minSize: validateSize(value),
+      maxSize: validateSize(value),
       prohibitedSymbols: validateProhibitedSymbols(value),
     };
 
     setValidationError(validationErrorState);
     if (
-      validationErrorState.minSize ||
+      validationErrorState.maxSize ||
       validationErrorState.prohibitedSymbols
     ) {
       return;
@@ -50,14 +50,16 @@ const Home: FC = () => {
             className="form__input"
             value={value}
             onChange={(e) => {
-              setValidationError({ minSize: false, prohibitedSymbols: false });
+              setValidationError({ maxSize: false, prohibitedSymbols: false });
               setValue(e.target.value);
             }}
           />
           <button onClick={handleClick}>Check VIN</button>
         </form>
-        {validationError.minSize && (
-          <div className="form__error">VIN size must be 17 symbols</div>
+        {validationError.maxSize && (
+          <div className="form__error">
+            VIN size must be less than 17 symbols
+          </div>
         )}
         {validationError.prohibitedSymbols && (
           <div className="form__error">VIN included prohibited symbols</div>

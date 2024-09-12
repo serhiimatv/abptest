@@ -44,7 +44,7 @@ export const filteredData = (response: VinResponse) => {
 };
 
 export const validateSize = (string: string): boolean => {
-  if (string.length === 17) {
+  if (string.length <= 17) {
     return false;
   }
   return true;
