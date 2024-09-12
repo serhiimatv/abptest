@@ -1,23 +1,22 @@
-import { FC, SyntheticEvent, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { FC, SyntheticEvent, useContext, useState } from "react";
 import {
-  checkCacheLength,
-  getHistory,
+  checkCodesArrayLength,
   validateProhibitedSymbols,
   validateSize,
 } from "../utility";
 import { useVinQuery } from "../hooks/useVinQuery";
 import Result from "../components/Result";
+import { DecryptedCodesContext } from "../context/DecryptedCodesContext";
+import DecryptedCodes from "../components/DecryptedCodes";
 
 const Home: FC = () => {
-  const queryClient = useQueryClient();
   const [value, setValue] = useState("");
   const [validationError, setValidationError] = useState({
     minSize: false,
     prohibitedSymbols: false,
   });
 
-  const [cache, setCache] = useState<string[]>([]);
+  const { codes, setCodes } = useContext(DecryptedCodesContext);
 
   const { refetch, error } = useVinQuery(value);
 
@@ -36,7 +35,7 @@ const Home: FC = () => {
     ) {
       return;
     }
-    setCache(checkCacheLength(cache, value));
+    setCodes(checkCodesArrayLength(codes, value));
 
     refetch();
   };
@@ -50,7 +49,10 @@ const Home: FC = () => {
             type="text"
             className="form__input"
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => {
+              setValidationError({ minSize: false, prohibitedSymbols: false });
+              setValue(e.target.value);
+            }}
           />
           <button onClick={handleClick}>Check VIN</button>
         </form>
@@ -62,14 +64,10 @@ const Home: FC = () => {
         )}
         {error && <div className="form__error">{error.toString()}</div>}
       </section>
-      <section className="cache-results">
-        <h2>Request history</h2>
-        {getHistory(queryClient, cache).map((value, idx) => (
-          <button key={value + idx} onClick={() => setValue(value)}>
-            {value}
-          </button>
-        ))}
-      </section>
+      <DecryptedCodes
+        setValue={setValue}
+        setValidationError={setValidationError}
+      />
       <hr />
       <Result value={value} />
     </>

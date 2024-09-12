@@ -55,7 +55,7 @@ export const validateProhibitedSymbols = (string: string): boolean => {
   return !regex.test(string);
 };
 
-export const checkCacheLength = (array: string[], string: string) => {
+export const checkCodesArrayLength = (array: string[], string: string) => {
   const arrayClone = [...array];
   if (arrayClone.length === 3) {
     arrayClone.shift();
@@ -67,7 +67,10 @@ export const checkCacheLength = (array: string[], string: string) => {
   return arrayClone;
 };
 
-export const getHistory = (client: QueryClient, cache: string[]): string[] => {
+export const getDecryptedCodesFromHistory = (
+  client: QueryClient,
+  cache: string[]
+): string[] => {
   const queries = client
     .getQueryCache()
     .findAll({ queryKey: ["userVariable"] });
