@@ -92,6 +92,11 @@
   text-align: center;
   margin-bottom: 20px;
 }
+
+.result h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
 .result p {
   text-align: center;
 }

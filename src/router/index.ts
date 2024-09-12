@@ -1,18 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
 import Header from "../components/Header";
 import Variables from "../pages/Variables";
-import DefiniteVariable from "../pages/DefiniteVariable";
+import VariableId from "../pages/VariableId";
 import ErrorBoundary from "../components/ErrorBoundary";
-import VinDecoder from "../pages/VinDecoder";
+import Home from "../pages/Home";
 
 const Router = createBrowserRouter([
   {
     path: "/",
     Component: Header,
+    ErrorBoundary,
     children: [
       {
         path: "/",
-        Component: VinDecoder,
+        Component: Home,
+        ErrorBoundary,
       },
       {
         path: "/variables",
@@ -21,7 +23,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "/variables/:variableID",
-        Component: DefiniteVariable,
+        Component: VariableId,
         ErrorBoundary,
       },
     ],

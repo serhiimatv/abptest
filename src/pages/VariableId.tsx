@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { stripHtmlTags } from "../utility";
 import { useVariablesQuery } from "../hooks/useVariablesQuery";
 
-const DefiniteVariable: FC = () => {
+const VariableId: FC = () => {
   const { variableID } = useParams();
 
   const { data, isLoading, isSuccess, isError } = useVariablesQuery();
@@ -29,4 +29,4 @@ const DefiniteVariable: FC = () => {
   );
 };
 
-export default DefiniteVariable;
+export default VariableId;

@@ -1,15 +1,15 @@
 import { FC, SyntheticEvent, useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   checkCacheLength,
-  fetchVin,
-  filteredData,
   getHistory,
   validateProhibitedSymbols,
   validateSize,
 } from "../utility";
+import { useVinQuery } from "../hooks/useVinQuery";
+import Result from "../components/Result";
 
-const VinDecoder: FC = () => {
+const Home: FC = () => {
   const queryClient = useQueryClient();
   const [value, setValue] = useState("");
   const [validationError, setValidationError] = useState({
@@ -19,12 +19,7 @@ const VinDecoder: FC = () => {
 
   const [cache, setCache] = useState<string[]>([]);
 
-  const { data, refetch, isSuccess, isLoading, error } = useQuery({
-    queryFn: () => fetchVin(value),
-    queryKey: ["userVariable", value],
-    enabled: false,
-    select: filteredData,
-  });
+  const { refetch, error } = useVinQuery(value);
 
   const handleClick = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -49,7 +44,7 @@ const VinDecoder: FC = () => {
   return (
     <>
       <section className="form__wrapper">
-        <h1>Decode your vin</h1>
+        <h1>Decode your VIN</h1>
         <form className="form">
           <input
             type="text"
@@ -76,20 +71,9 @@ const VinDecoder: FC = () => {
         ))}
       </section>
       <hr />
-      <section className="result">
-        <h2>Results</h2>
-        {!data && <div>Input you VIN</div>}
-        {isLoading && <div className="loading">Loading...</div>}
-        {isSuccess &&
-          data?.map((variable, idx) => (
-            <div key={variable.Variable + idx}>
-              <h2>{variable.Variable}</h2>
-              <p>{variable.Value}</p>
-            </div>
-          ))}
-      </section>
+      <Result value={value} />
     </>
   );
 };
 
-export default VinDecoder;
+export default Home;
