@@ -1,9 +1,9 @@
-import { Dispatch, FC, useContext } from "react";
+import { Dispatch, useContext } from "react";
 import { getDecryptedCodesFromHistory } from "../utility";
 import { useQueryClient } from "@tanstack/react-query";
 import { DecryptedCodesContext } from "../context/DecryptedCodesContext";
 
-interface IProps {
+type DecryptedCodesProps = {
   setValue: Dispatch<React.SetStateAction<string>>;
   setValidationError: Dispatch<
     React.SetStateAction<{
@@ -11,9 +11,12 @@ interface IProps {
       prohibitedSymbols: boolean;
     }>
   >;
-}
+};
 
-const DecryptedCodes: FC<IProps> = ({ setValue, setValidationError }) => {
+const DecryptedCodes = ({
+  setValue,
+  setValidationError,
+}: DecryptedCodesProps) => {
   const queryClient = useQueryClient();
   const { codes } = useContext(DecryptedCodesContext);
 

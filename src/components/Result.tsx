@@ -1,11 +1,10 @@
-import { FC } from "react";
 import { useVinQuery } from "../hooks/useVinQuery";
 
-interface IProps {
+type ResultProps = {
   value: string;
-}
+};
 
-const Result: FC<IProps> = ({ value }) => {
+const Result = ({ value }: ResultProps) => {
   const { data, isSuccess, isLoading } = useVinQuery(value);
 
   return (
