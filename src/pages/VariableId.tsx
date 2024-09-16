@@ -8,6 +8,10 @@ const VariableId: FC = () => {
 
   const { data, isLoading, isSuccess, isError } = useVariablesQuery();
 
+  if (!data?.Results.some((variable) => variable.ID === Number(variableID))) {
+    throw Error;
+  }
+
   return (
     <main className="main">
       <section className="main__description">
