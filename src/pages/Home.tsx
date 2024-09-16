@@ -2,15 +2,18 @@ import { FC, SyntheticEvent, useContext, useState } from "react";
 import {
   checkCodesArrayLength,
   validateProhibitedSymbols,
-  validateSize,
+  validateMaxSize,
 } from "../utility";
 import { useVinQuery } from "../hooks/useVinQuery";
 import Result from "../components/Result";
 import { DecryptedCodesContext } from "../context/DecryptedCodesContext";
 import DecryptedCodes from "../components/DecryptedCodes";
 
+const MAX_SIZE = 17;
+const MAX_CODES_CONTAIN = 3;
+
 const Home: FC = () => {
-  const [value, setValue] = useState("");
+  const [vin, setVin] = useState("");
   const [validationError, setValidationError] = useState({
     maxSize: false,
     prohibitedSymbols: false,
@@ -18,14 +21,16 @@ const Home: FC = () => {
 
   const { codes, setCodes } = useContext(DecryptedCodesContext);
 
-  const { refetch, error } = useVinQuery(value);
+  const { refetch, error } = useVinQuery(vin);
 
   const handleClick = (e: SyntheticEvent) => {
     e.preventDefault();
 
+    setValidationError({ maxSize: false, prohibitedSymbols: false });
+
     const validationErrorState = {
-      maxSize: validateSize(value),
-      prohibitedSymbols: validateProhibitedSymbols(value),
+      maxSize: validateMaxSize(vin, MAX_SIZE),
+      prohibitedSymbols: validateProhibitedSymbols(vin),
     };
 
     setValidationError(validationErrorState);
@@ -35,7 +40,7 @@ const Home: FC = () => {
     ) {
       return;
     }
-    setCodes(checkCodesArrayLength(codes, value));
+    setCodes(checkCodesArrayLength(codes, vin, MAX_CODES_CONTAIN));
 
     refetch();
   };
@@ -48,10 +53,10 @@ const Home: FC = () => {
           <input
             type="text"
             className="form__input"
-            value={value}
+            value={vin}
             onChange={(e) => {
               setValidationError({ maxSize: false, prohibitedSymbols: false });
-              setValue(e.target.value);
+              setVin(e.target.value);
             }}
           />
           <button onClick={handleClick}>Check VIN</button>
@@ -66,12 +71,9 @@ const Home: FC = () => {
         )}
         {error && <div className="form__error">{error.toString()}</div>}
       </section>
-      <DecryptedCodes
-        setValue={setValue}
-        setValidationError={setValidationError}
-      />
+      <DecryptedCodes setVin={setVin} setValidationError={setValidationError} />
       <hr />
-      <Result value={value} />
+      <Result value={vin} />
     </>
   );
 };

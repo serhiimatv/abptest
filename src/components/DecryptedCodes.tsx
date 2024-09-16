@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { DecryptedCodesContext } from "../context/DecryptedCodesContext";
 
 type DecryptedCodesProps = {
-  setValue: Dispatch<React.SetStateAction<string>>;
+  setVin: Dispatch<React.SetStateAction<string>>;
   setValidationError: Dispatch<
     React.SetStateAction<{
       maxSize: boolean;
@@ -14,7 +14,7 @@ type DecryptedCodesProps = {
 };
 
 const DecryptedCodes = ({
-  setValue,
+  setVin,
   setValidationError,
 }: DecryptedCodesProps) => {
   const queryClient = useQueryClient();
@@ -27,8 +27,7 @@ const DecryptedCodes = ({
         <button
           key={value + idx}
           onClick={() => {
-            setValidationError({ maxSize: false, prohibitedSymbols: false });
-            setValue(value);
+            setVin(value);
           }}
         >
           {value}
