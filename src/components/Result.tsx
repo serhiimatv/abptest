@@ -1,4 +1,4 @@
-import { useVinQuery } from "../hooks/useVinQuery";
+import { useVinQuery } from "@/hooks/useVinQuery";
 
 type ResultProps = {
   value: string;

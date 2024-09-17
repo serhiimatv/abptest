@@ -1,10 +1,10 @@
 import { FC, useMemo, useState } from "react";
 import { RouterProvider } from "react-router-dom";
-import Router from "./router";
+import Router from "@/router";
 import {
   DecryptedCodesContext,
   IContext,
-} from "./context/DecryptedCodesContext";
+} from "@/context/DecryptedCodesContext";
 
 const App: FC = () => {
   const [codes, setCodes] = useState<string[]>([] as string[]);

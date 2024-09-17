@@ -1,4 +1,4 @@
-import { VinResultsEntity } from "./entities";
+import { VinResultsEntity } from "@/models/entities";
 
 export interface VinResponse {
   Count: number;

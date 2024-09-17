@@ -1,16 +1,14 @@
 import { FC, SyntheticEvent, useContext, useState } from "react";
+import Result from "@/components/Result";
+import DecryptedCodes from "@/components/DecryptedCodes";
+import { useVinQuery } from "@/hooks/useVinQuery";
+import { DecryptedCodesContext } from "@/context/DecryptedCodesContext";
 import {
   checkCodesArrayLength,
   validateProhibitedSymbols,
   validateMaxSize,
-} from "../utility";
-import { useVinQuery } from "../hooks/useVinQuery";
-import Result from "../components/Result";
-import { DecryptedCodesContext } from "../context/DecryptedCodesContext";
-import DecryptedCodes from "../components/DecryptedCodes";
-
-const MAX_SIZE = 17;
-const MAX_CODES_CONTAIN = 3;
+} from "@/utility";
+import { MAX_CODES_CONTAIN, MAX_SIZE } from "@/utility/constants";
 
 const Home: FC = () => {
   const [vin, setVin] = useState("");

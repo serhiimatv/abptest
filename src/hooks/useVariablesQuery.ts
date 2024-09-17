@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { VariablesResponse } from "../models/variablesResponse";
+import { VariablesResponse } from "@/models/variablesResponse";
 
 const fetchVariables = async () => {
   const response = await fetch(

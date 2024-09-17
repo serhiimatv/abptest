@@ -1,4 +1,4 @@
-import { VariablesResultsEntity } from "./entities";
+import { VariablesResultsEntity } from "@/models/entities";
 
 export interface VariablesResponse {
   Count: number;

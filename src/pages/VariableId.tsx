@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useParams } from "react-router-dom";
-import { stripHtmlTags } from "../utility";
-import { useVariablesQuery } from "../hooks/useVariablesQuery";
+import { stripHtmlTags } from "@/utility";
+import { useVariablesQuery } from "@/hooks/useVariablesQuery";
 
 const VariableId: FC = () => {
   const { variableID } = useParams();

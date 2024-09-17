@@ -1,7 +1,7 @@
 import { Dispatch, useContext } from "react";
-import { getDecryptedCodesFromHistory } from "../utility";
+import { getDecryptedCodesFromHistory } from "@/utility";
 import { useQueryClient } from "@tanstack/react-query";
-import { DecryptedCodesContext } from "../context/DecryptedCodesContext";
+import { DecryptedCodesContext } from "@/context/DecryptedCodesContext";
 
 type DecryptedCodesProps = {
   setVin: Dispatch<React.SetStateAction<string>>;

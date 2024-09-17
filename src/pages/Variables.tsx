@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { stripHtmlTags } from "../utility";
+import { stripHtmlTags } from "@/utility";
 import { Link } from "react-router-dom";
-import { useVariablesQuery } from "../hooks/useVariablesQuery";
+import { useVariablesQuery } from "@/hooks/useVariablesQuery";
 
 const Variables: FC = () => {
   const { data, isLoading, isSuccess } = useVariablesQuery();
