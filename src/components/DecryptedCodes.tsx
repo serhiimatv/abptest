@@ -2,26 +2,18 @@ import { Dispatch, useContext } from "react";
 import { getDecryptedCodesFromHistory } from "@/utility";
 import { useQueryClient } from "@tanstack/react-query";
 import { DecryptedCodesContext } from "@/context/DecryptedCodesContext";
+import styles from "@/app.module.css";
 
 type DecryptedCodesProps = {
   setVin: Dispatch<React.SetStateAction<string>>;
-  setValidationError: Dispatch<
-    React.SetStateAction<{
-      maxSize: boolean;
-      prohibitedSymbols: boolean;
-    }>
-  >;
 };
 
-const DecryptedCodes = ({
-  setVin,
-  setValidationError,
-}: DecryptedCodesProps) => {
+const DecryptedCodes = ({ setVin }: DecryptedCodesProps) => {
   const queryClient = useQueryClient();
   const { codes } = useContext(DecryptedCodesContext);
 
   return (
-    <section className="decrypted-codes">
+    <section className={styles.decrypted_codes}>
       <h2>Request history</h2>
       {getDecryptedCodesFromHistory(queryClient, codes).map((value, idx) => (
         <button

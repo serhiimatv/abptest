@@ -1,21 +1,24 @@
 import { Link, Outlet } from "react-router-dom";
+import styles from "@/app.module.css";
 
 const Header = () => {
   return (
     <>
-      <header className="header">
-        <Link to="/">
-          <span className="header__logo">VIN Decoder</span>
-        </Link>
-        <nav className="header__navigation">
-          <Link to="/" className="header__navigation-link">
-            Main
+      <div className={styles.header_wrapper}>
+        <header className={styles.header}>
+          <Link to="/">
+            <span className={styles.header_logo}>VIN Decoder</span>
           </Link>
-          <Link to="/variables" className="header__navigation-link">
-            Variables
-          </Link>
-        </nav>
-      </header>
+          <nav className={styles.header_navigation}>
+            <Link to="/" className={styles.header_navigation_link}>
+              Main
+            </Link>
+            <Link to="/variables" className={styles.header_navigation_link}>
+              Variables
+            </Link>
+          </nav>
+        </header>
+      </div>
       <Outlet />
     </>
   );

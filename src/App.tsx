@@ -5,6 +5,7 @@ import {
   DecryptedCodesContext,
   IContext,
 } from "@/context/DecryptedCodesContext";
+import styles from "@/app.module.css";
 
 const App: FC = () => {
   const [codes, setCodes] = useState<string[]>([] as string[]);
@@ -19,7 +20,9 @@ const App: FC = () => {
 
   return (
     <DecryptedCodesContext.Provider value={contextValue}>
-      <RouterProvider router={Router} />
+      <div className={styles.container}>
+        <RouterProvider router={Router} />
+      </div>
     </DecryptedCodesContext.Provider>
   );
 };

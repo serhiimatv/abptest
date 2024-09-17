@@ -9,6 +9,7 @@ import {
   validateMaxSize,
 } from "@/utility";
 import { MAX_CODES_CONTAIN, MAX_SIZE } from "@/utility/constants";
+import styles from "@/app.module.css";
 
 const Home: FC = () => {
   const [vin, setVin] = useState("");
@@ -44,35 +45,53 @@ const Home: FC = () => {
   };
 
   return (
-    <>
-      <section className="form__wrapper">
+    <main>
+      <section className={styles.form_wrapper}>
         <h1>Decode your VIN</h1>
-        <form className="form">
+        <form className={styles.form}>
           <input
             type="text"
-            className="form__input"
+            className={styles.form_input}
             value={vin}
             onChange={(e) => {
-              setValidationError({ maxSize: false, prohibitedSymbols: false });
+              setValidationError({
+                maxSize: false,
+                prohibitedSymbols: false,
+              });
               setVin(e.target.value);
             }}
           />
-          <button onClick={handleClick}>Check VIN</button>
+          <button onClick={handleClick} className={styles.from_button}>
+            Check VIN
+          </button>
         </form>
-        {validationError.maxSize && (
-          <div className="form__error">
-            VIN size must be less than 17 symbols
-          </div>
-        )}
-        {validationError.prohibitedSymbols && (
-          <div className="form__error">VIN included prohibited symbols</div>
-        )}
-        {error && <div className="form__error">{error.toString()}</div>}
+        <div
+          className={
+            validationError.maxSize
+              ? styles.form_error
+              : styles.form_error_transparent
+          }
+        >
+          VIN size must be less than 17 symbols
+        </div>
+        <div
+          className={
+            validationError.prohibitedSymbols
+              ? styles.form_error
+              : styles.form_error_transparent
+          }
+        >
+          VIN included prohibited symbols
+        </div>
+        <div
+          className={error ? styles.form_error : styles.form_error_transparent}
+        >
+          {error === null ? "error" : error.toString()}
+        </div>
       </section>
-      <DecryptedCodes setVin={setVin} setValidationError={setValidationError} />
-      <hr />
+      <DecryptedCodes setVin={setVin} />
       <Result value={vin} />
-    </>
+    </main>
   );
 };
 
