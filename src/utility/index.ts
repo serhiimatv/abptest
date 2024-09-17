@@ -1,9 +1,3 @@
-import { QueryClient } from "@tanstack/react-query";
-
-export const stripHtmlTags = (str: string): string => {
-  return str.replace(/<\/?[^>]+(>|$)/g, "");
-};
-
 export const validateMaxSize = (string: string, size: number): boolean => {
   if (string.length <= size) {
     return false;
@@ -30,21 +24,4 @@ export const checkCodesArrayLength = (
   }
 
   return arrayClone;
-};
-
-export const getDecryptedCodesFromHistory = (
-  client: QueryClient,
-  cache: string[]
-): string[] => {
-  const queries = client
-    .getQueryCache()
-    .findAll({ queryKey: ["userVariable"] });
-
-  const keys = queries.map((query) => {
-    if (cache.includes(query.queryKey[1] as string)) {
-      return query.queryKey[1];
-    }
-  }) as string[];
-
-  return keys.filter((key) => key);
 };

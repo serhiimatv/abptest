@@ -1,6 +1,5 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { stripHtmlTags } from "@/utility";
 import { useVariablesQuery } from "@/hooks/useVariablesQuery";
 import style from "@/app.module.css";
 
@@ -9,9 +8,14 @@ const VariableId: FC = () => {
 
   const { data, isLoading, isSuccess } = useVariablesQuery();
 
-  if (!data?.Results.some((variable) => variable.ID === Number(variableID))) {
-    throw Error;
-  }
+  useEffect(() => {
+    if (
+      data &&
+      !data?.Results.some((variable) => variable.ID === Number(variableID))
+    ) {
+      throw Error;
+    }
+  }, [data]);
 
   return (
     <main className={style.main}>
@@ -23,7 +27,9 @@ const VariableId: FC = () => {
               return (
                 <div key={variable.ID}>
                   <h1 className={style.main_header}>{variable.Name}</h1>
-                  <p>{stripHtmlTags(variable.Description)}</p>
+                  <p
+                    dangerouslySetInnerHTML={{ __html: variable.Description }}
+                  ></p>
                 </div>
               );
             }

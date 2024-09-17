@@ -28,11 +28,11 @@ export const filteredData = (response: VinResponse) => {
   }
 };
 
-export const useVinQuery = (value: string) => {
+export const useVinQuery = (vin: string) => {
   return useQuery({
-    queryFn: () => fetchVin(value),
-    queryKey: ["userVariable", value],
+    queryFn: () => fetchVin(vin),
+    queryKey: ["userVariable", vin],
     enabled: false,
-    select: useCallback(filteredData, [value]),
+    select: useCallback(filteredData, [vin]),
   });
 };

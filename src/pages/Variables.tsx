@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { stripHtmlTags } from "@/utility";
 import { Link } from "react-router-dom";
 import { useVariablesQuery } from "@/hooks/useVariablesQuery";
 import styles from "@/app.module.css";
@@ -20,9 +19,10 @@ const Variables: FC = () => {
                   {variable.Name}
                 </h2>
               </Link>
-              <p className="main__description-text">
-                {stripHtmlTags(variable.Description)}
-              </p>
+              <p
+                className="main__description-text"
+                dangerouslySetInnerHTML={{ __html: variable.Description }}
+              ></p>
             </div>
           ))}
         {isSuccess && data.Results.length === 0 && (

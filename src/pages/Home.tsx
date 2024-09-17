@@ -8,7 +8,7 @@ import {
   validateProhibitedSymbols,
   validateMaxSize,
 } from "@/utility";
-import { MAX_CODES_CONTAIN, MAX_SIZE } from "@/utility/constants";
+import { MAX_CODES_CONTAIN, MAX_SIZE } from "@/constants";
 import styles from "@/app.module.css";
 
 const Home: FC = () => {
