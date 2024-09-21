@@ -5,4 +5,7 @@ export interface IContext {
   setCodes: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export const DecryptedCodesContext = createContext<IContext>({} as IContext);
+export const DecryptedCodesContext = createContext<IContext>({
+  codes: [],
+  setCodes: () => {},
+});

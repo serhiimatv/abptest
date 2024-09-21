@@ -2,9 +2,9 @@ import { Dispatch, useContext } from "react";
 import { DecryptedCodesContext } from "@/context/DecryptedCodesContext";
 import styles from "@/app.module.css";
 
-type DecryptedCodesProps = {
+interface DecryptedCodesProps {
   setVin: Dispatch<React.SetStateAction<string>>;
-};
+}
 
 const DecryptedCodes = ({ setVin }: DecryptedCodesProps) => {
   const { codes } = useContext(DecryptedCodesContext);
@@ -12,10 +12,10 @@ const DecryptedCodes = ({ setVin }: DecryptedCodesProps) => {
   return (
     <section className={styles.decrypted_codes}>
       <h2>Request history</h2>
-      {codes.length === 0 ? "You check nothing" : null}
+      {codes.length === 0 ? <p>You check nothing</p> : null}
       {codes.map((value, idx) => (
         <button
-          key={value + idx}
+          key={`${value}-${idx}`}
           onClick={() => {
             setVin(value);
           }}

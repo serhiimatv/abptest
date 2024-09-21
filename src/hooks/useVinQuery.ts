@@ -19,13 +19,9 @@ export const fetchVin = async (vin: string) => {
 };
 
 export const filteredData = (response: VinResponse) => {
-  if (response.Results) {
-    return response.Results.filter((result) => {
-      if (result.Value !== null && result.Value !== "") {
-        return true;
-      }
-    });
-  }
+  return response.Results.filter(
+    (result) => result.Value !== null && result.Value !== ""
+  );
 };
 
 export const useVinQuery = (vin: string) => {

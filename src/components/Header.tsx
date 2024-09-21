@@ -4,12 +4,15 @@ import styles from "@/app.module.css";
 const Header = () => {
   return (
     <>
-      <div className={styles.header_wrapper}>
-        <header className={styles.header}>
+      <header className={styles.header_wrapper}>
+        <div className={styles.header}>
           <Link to="/">
             <span className={styles.header_logo}>VIN Decoder</span>
           </Link>
-          <nav className={styles.header_navigation}>
+          <nav
+            className={styles.header_navigation}
+            aria-label="Main Navigation"
+          >
             <Link to="/" className={styles.header_navigation_link}>
               Main
             </Link>
@@ -17,8 +20,8 @@ const Header = () => {
               Variables
             </Link>
           </nav>
-        </header>
-      </div>
+        </div>
+      </header>
       <Outlet />
     </>
   );

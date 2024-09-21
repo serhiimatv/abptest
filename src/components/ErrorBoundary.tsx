@@ -4,7 +4,9 @@ import styles from "@/app.module.css";
 const ErrorBoundary = () => {
   return (
     <div className={styles.error}>
-      <Link to="/">Happened some error, return to main page</Link>
+      <h1>Error</h1>
+      <p>An error occurred. Please return to the main page.</p>
+      <Link to="/">Go to Main Page</Link>
     </div>
   );
 };

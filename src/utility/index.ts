@@ -1,27 +1,21 @@
-export const validateMaxSize = (string: string, size: number): boolean => {
-  if (string.length <= size) {
-    return false;
-  }
-  return true;
+export const validateMaxSize = (input: string, size: number): boolean => {
+  return input.length > size;
 };
 
-export const validateProhibitedSymbols = (string: string): boolean => {
+export const validateProhibitedSymbols = (input: string): boolean => {
   const regex = /^[a-zA-Z0-9]+$/;
-  return !regex.test(string);
+  return !regex.test(input);
 };
 
 export const checkCodesArrayLength = (
-  array: string[],
-  string: string,
+  codesArray: string[],
+  newCode: string,
   length: number
 ): string[] => {
-  const arrayClone = [...array];
+  const arrayClone = [...codesArray];
   if (arrayClone.length === length) {
     arrayClone.shift();
-    arrayClone.push(string);
-  } else {
-    arrayClone.push(string);
   }
-
+  arrayClone.push(newCode);
   return arrayClone;
 };

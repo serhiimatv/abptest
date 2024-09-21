@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { RouterProvider } from "react-router-dom";
 import Router from "@/router";
 import {
@@ -7,15 +7,15 @@ import {
 } from "@/context/DecryptedCodesContext";
 import styles from "@/app.module.css";
 
-const App: FC = () => {
-  const [codes, setCodes] = useState<string[]>([] as string[]);
+const App = () => {
+  const [codes, setCodes] = useState<string[]>([]);
 
   const contextValue = useMemo<IContext>(
     () => ({
-      codes: codes,
-      setCodes: setCodes,
+      codes,
+      setCodes,
     }),
-    [codes, setCodes]
+    [codes]
   );
 
   return (

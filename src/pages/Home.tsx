@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent, useContext, useState } from "react";
+import { SyntheticEvent, useContext, useState } from "react";
 import Result from "@/components/Result";
 import DecryptedCodes from "@/components/DecryptedCodes";
 import { useVinQuery } from "@/hooks/useVinQuery";
@@ -11,9 +11,14 @@ import {
 import { MAX_CODES_CONTAIN, MAX_SIZE } from "@/constants";
 import styles from "@/app.module.css";
 
-const Home: FC = () => {
+interface ValidationError {
+  maxSize: boolean;
+  prohibitedSymbols: boolean;
+}
+
+const Home = () => {
   const [vin, setVin] = useState("");
-  const [validationError, setValidationError] = useState({
+  const [validationError, setValidationError] = useState<ValidationError>({
     maxSize: false,
     prohibitedSymbols: false,
   });
@@ -27,21 +32,22 @@ const Home: FC = () => {
 
     setValidationError({ maxSize: false, prohibitedSymbols: false });
 
-    const validationErrorState = {
+    if (!vin) return;
+
+    const validationErrorState: ValidationError = {
       maxSize: validateMaxSize(vin, MAX_SIZE),
       prohibitedSymbols: validateProhibitedSymbols(vin),
     };
 
     setValidationError(validationErrorState);
     if (
-      validationErrorState.maxSize ||
-      validationErrorState.prohibitedSymbols
+      !validationErrorState.maxSize &&
+      !validationErrorState.prohibitedSymbols
     ) {
-      return;
-    }
-    setCodes(checkCodesArrayLength(codes, vin, MAX_CODES_CONTAIN));
+      setCodes(checkCodesArrayLength(codes, vin, MAX_CODES_CONTAIN));
 
-    refetch();
+      refetch();
+    }
   };
 
   return (
@@ -90,7 +96,7 @@ const Home: FC = () => {
         </div>
       </section>
       <DecryptedCodes setVin={setVin} />
-      <Result value={vin} />
+      <Result vin={vin} />
     </main>
   );
 };

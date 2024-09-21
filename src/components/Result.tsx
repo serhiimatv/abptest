@@ -2,16 +2,16 @@ import { useVinQuery } from "@/hooks/useVinQuery";
 import styles from "@/app.module.css";
 
 type ResultProps = {
-  value: string;
+  vin: string;
 };
 
-const Result = ({ value }: ResultProps) => {
-  const { data, isSuccess, isLoading } = useVinQuery(value);
+const Result = ({ vin }: ResultProps) => {
+  const { data, isSuccess, isLoading } = useVinQuery(vin);
 
   return (
     <section className={styles.result}>
       <h2>Results</h2>
-      {!data && (
+      {!data && !isLoading && (
         <div className={styles.result_check}>Input and check your VIN</div>
       )}
       {isLoading && <div className={styles.loading}>Loading...</div>}
